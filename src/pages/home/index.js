@@ -5,6 +5,8 @@ class App extends Component{
         return(
             <div className="App">
                 <header className="App-header">Calculator</header>
+                <Output result="Enter your maths problem"/>
+                <KeyPad />
             </div>
         );
     }
@@ -33,6 +35,16 @@ export default class KeyPad extends Component{
                     <Button onClick = {this.handleClick} label = "." value = "."/>
                     <Button onClick = {this.handleClick} label = "=" value = "="/>
                 </Buttons>
+            </div>
+        )
+    }
+}
+
+export default class Output extends Component{
+    render () {
+        return(
+            <div>
+                <p>{this.props.result}</p>
             </div>
         )
     }
