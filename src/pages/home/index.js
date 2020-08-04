@@ -40,6 +40,7 @@ export default class KeyPad extends Component{
     render() {
         return(
             <div>
+                <p>{this.props.result}</p>
                 <Buttons>
                     <Button onClick = {this.handleClick} label = "+" value = "+"/>
                     <Button onClick = {this.handleClick} label = "-" value = "-"/>
@@ -52,15 +53,6 @@ export default class KeyPad extends Component{
     }
 }
 
-export default class Output extends Component{
-    render () {
-        return(
-            <div>
-                <p>{this.props.result}</p>
-            </div>
-        )
-    }
-}
 
 
 ReactDOM.render(<Calculator />, document.getElementById('root'));
