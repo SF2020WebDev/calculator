@@ -1,39 +1,55 @@
 import React, { Component } from "react";
 
-class App extends Component{
-    render() {
-        return(
-            <div className="App">
-                <header className="App-header">Calculator</header>
-                <Output result="Enter your maths problem"/>
-                <KeyPad />
-            </div>
-        );
+class Calculator extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {value: ''};
+  
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
-}
+  
+    handleChange(event) {
+      this.setState({value: event.target.value});
+    }
+  
+    handleSubmit(event) {
+      alert('Solution: ' + this.state.value);
+      event.preventDefault();
+    }
+  
+    render() {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      );
+    }
+  }
+
+    calculate = () => {
+        this.setState({
+            result: eval(this.state.result)
+        })
+    }
+
 
 export default class KeyPad extends Component{
+    buttonPressed = (event) => {
+        this.props.buttonPressed(event.target.name);
+    };
     render() {
         return(
             <div>
                 <Buttons>
-                    <Button onClick = {this.handleClick} label = "1" value = "1"/>
-                    <Button onClick = {this.handleClick} label = "2" value = "2"/>
-                    <Button onClick = {this.handleClick} label = "3" value = "3"/>
-                    <Button onClick = {this.handleClick} label = "4" value = "4"/>
-                    <Button onClick = {this.handleClick} label = "5" value = "5"/>
-                    <Button onClick = {this.handleClick} label = "6" value = "6"/>
-                    <Button onClick = {this.handleClick} label = "7" value = "7"/>
-                    <Button onClick = {this.handleClick} label = "8" value = "8"/>
-                    <Button onClick = {this.handleClick} label = "9" value = "9"/>
-                    <Button onClick = {this.handleClick} label = "0" value = "0"/>
-                    <Button onClick = {this.handleClick} label = "C" value = "Clear"/>
                     <Button onClick = {this.handleClick} label = "+" value = "+"/>
                     <Button onClick = {this.handleClick} label = "-" value = "-"/>
                     <Button onClick = {this.handleClick} label = "/" value = "/"/>
                     <Button onClick = {this.handleClick} label = "x" value = "*"/>
-                    <Button onClick = {this.handleClick} label = "." value = "."/>
-                    <Button onClick = {this.handleClick} label = "=" value = "="/>
+
                 </Buttons>
             </div>
         )
@@ -49,3 +65,8 @@ export default class Output extends Component{
         )
     }
 }
+
+ReactDOM.render(
+    Calculator,
+    document.getElementById("root")
+);
