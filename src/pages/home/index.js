@@ -1,91 +1,51 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Button from '../../components/button.js';
+import Input from '../../components/input.js';
 
-
-
-export default class Calculator extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        firstNumber: "",
-        secondNumber: "",
-        total: "",
+        firstNumber: 0,
+        secondNumber: 0,
+        total: 0,
     };
   }
-
-
-  changeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({[nam]: val}); 
-    
-  }
-
-  changeHandler(){
-    const add = () => {
-        console.log (this.state.firstNumber) + (this.state.secondNumber);
+    updateFirstNumber(event){
+        this.setState({firstNumber: parseInt(event.target.value)})
     }
-        <button onClick= {this.handleClick} value = "+"> + </button>
-    
-    let subtract = () => {
-        console.log(this.state.firstNumber) - (this.state.secondNumber);
-      } 
-      <button onClick= {this.handleClick} value = "-"> - </button>
-    
-    let multiply = () => {
-        console.log(this.state.firstNumber) * (this.state.secondNumber);
+    updateSecondNumber(event) {
+      this.setState({secondNumber: parseInt(event.target.value)})
     }
-        <button onClick= {this.handleClick} value = "*"> x </button>
-    
-    let divide = () => {
-        console.log(this.state.firstNumber) / (this.state.secondNumber);
+    add() {
+        this.setState({total:this.state.firstNumber + this.state.secondNumber});
     }
-        <button onClick= {this.handleClick} value = "/"> / </button>
-  }
+    subtract() {
+      this.setState({total:this.state.firstNumber - this.state.secondNumber});
+      }
+    multiply() {
+      this.setState({total:this.state.firstNumber * this.state.secondNumber});
+    }
+    divide() {
+      this.setState({total:this.state.firstNumber / this.state.secondNumber});
+    }
   render() {
     return (
-        <div>
-      <form>
-      <h1>Calculator {this.state.firstNumber} {this.state.secondNumber}</h1>
-      <p>Enter first number:</p>
-      <input
-        type='number'
-        onChange={this.changeHandler}
-      />
-      <p>Enter second number:</p>
-      <input
-        type='number'
-        onChange={this.changeHandler}
-      />
-      </form>
-
-
-      
-
+      <div>
+      <Input />
+      <Button onClick={() => this.add()} value={"+"} />
+      <Button onClick={() => this.subtract()} value={"-"} />
+      <Button onClick={() => this.multiply()} value={"*"} />
+      <Button onClick={() => this.divide()} value={"/"} />
+      <p>{this.state.total}</p>
       </div>
+
     );
   }
 }
 
-/*class KeyPad extends Component{
-    buttonPressed = (event) => {
-        this.props.buttonPressed(event.target.name);
-    };
-    render() {
-        return(
-            <div>
-                <p>{this.props.result}</p>
-                <Buttons>
-                    <Button onClick = {this.handleClick} label = "+" value = "+"/>
-                    <Button onClick = {this.handleClick} label = "-" value = "-"/>
-                    <Button onClick = {this.handleClick} label = "/" value = "/"/>
-                    <Button onClick = {this.handleClick} label = "x" value = "*"/>
 
-                </Buttons>
-            </div>
-        )
-    }
-}*/
+
 
 
 
